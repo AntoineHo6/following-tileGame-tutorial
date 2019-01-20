@@ -5,9 +5,13 @@
  */
 package tileGame;
 
-import java.awt.Color;
+import display.Display;
+import gfx.Assets;
+import gfx.ImageLoader;
+import gfx.SpriteSheet;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -24,6 +28,7 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
     
+    
     public Game(String title, int width, int height){
         this.WIDTH = width;
         this.HEIGHT = height;
@@ -32,10 +37,13 @@ public class Game implements Runnable{
     
     private void init() {
         display = new Display(TITLE, WIDTH, HEIGHT);
+        Assets.init();
     }
     
+    int x = 0;
+    
     private void tick() {
-        
+        x += 1;
     }
     
     private void render() {
@@ -52,7 +60,7 @@ public class Game implements Runnable{
         
         // Draw Here
         
-        
+        g.drawImage(Assets.ground, x, 10, null);
         
         // End Drawing
         
@@ -64,9 +72,32 @@ public class Game implements Runnable{
     public void run() {
         init();
         
+        int fps = 60;
+        double timePerTick = 1000000000 / fps;
+        double delta = 0;
+        long now;
+        long lastTime = System.nanoTime();
+        long timer = 0;
+        int ticks = 0;
+        
         while(running) {
-            tick();
-            render();
+            now = System.nanoTime();
+            delta += (now - lastTime) / timePerTick;
+            timer += now - lastTime;
+            lastTime = now;
+            
+            if (delta >= 1) {
+                tick();
+                render();
+                ticks++;
+                delta--;
+            }
+            
+            if (timer >= 1000000000){
+                System.out.println("ticks and Frames: " + ticks);
+                ticks = 0;
+                timer = 0;
+            }
         }
         
         stop();     // in case thread doesn't stop.

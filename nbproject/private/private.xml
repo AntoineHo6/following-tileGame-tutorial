@@ -3,9 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Antoine%20Ho/Documents/NetBeansProjects/beginner-2d-game-programming/src/tileGame/Game.java</file>
-            <file>file:/C:/Users/Antoine%20Ho/Documents/NetBeansProjects/beginner-2d-game-programming/src/tileGame/Display.java</file>
-            <file>file:/C:/Users/Antoine%20Ho/Documents/NetBeansProjects/beginner-2d-game-programming/src/tileGame/Launcher.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/display/Display.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/Launcher.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/gfx/ImageLoader.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/Game.java</file>
         </group>
     </open-files>
 </project-private>
