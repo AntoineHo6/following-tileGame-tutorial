@@ -12,6 +12,9 @@ import gfx.SpriteSheet;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import tileGame.states.GameState;
+import tileGame.states.MenuState;
+import tileGame.states.State;
 
 /**
  *
@@ -28,6 +31,10 @@ public class Game implements Runnable{
     private BufferStrategy bs;
     private Graphics g;
     
+    // States
+    private State gameState;
+    private State menuState;
+    
     
     public Game(String title, int width, int height){
         this.WIDTH = width;
@@ -38,12 +45,16 @@ public class Game implements Runnable{
     private void init() {
         display = new Display(TITLE, WIDTH, HEIGHT);
         Assets.init();
+        
+        gameState = new GameState();
+        menuState = new MenuState();
+        State.setState(gameState);
     }
     
-    int x = 0;
-    
     private void tick() {
-        x += 1;
+        if (State.getState() != null) {
+            State.getState().tick();
+        }
     }
     
     private void render() {
@@ -60,7 +71,9 @@ public class Game implements Runnable{
         
         // Draw Here
         
-        g.drawImage(Assets.ground, x, 10, null);
+        if (State.getState() != null) {
+            State.getState().render(g);
+        }
         
         // End Drawing
         
