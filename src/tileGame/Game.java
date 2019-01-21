@@ -7,11 +7,9 @@ package tileGame;
 
 import display.Display;
 import gfx.Assets;
-import gfx.ImageLoader;
-import gfx.SpriteSheet;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+import tileGame.input.KeyManager;
 import tileGame.states.GameState;
 import tileGame.states.MenuState;
 import tileGame.states.State;
@@ -35,23 +33,30 @@ public class Game implements Runnable{
     private State gameState;
     private State menuState;
     
+    // Inputs
+    private KeyManager keyManager;
+    
     
     public Game(String title, int width, int height){
         this.WIDTH = width;
         this.HEIGHT = height;
         this.TITLE = title;
+        keyManager = new KeyManager();
     }
     
     private void init() {
         display = new Display(TITLE, WIDTH, HEIGHT);
+        display.getFrame().addKeyListener(keyManager);
         Assets.init();
         
-        gameState = new GameState();
-        menuState = new MenuState();
+        gameState = new GameState(this);
+        menuState = new MenuState(this);
         State.setState(gameState);
     }
     
     private void tick() {
+        keyManager.tick();
+        
         if (State.getState() != null) {
             State.getState().tick();
         }
@@ -114,6 +119,10 @@ public class Game implements Runnable{
         }
         
         stop();     // in case thread doesn't stop.
+    }
+    
+    public KeyManager getKeyManager() {
+        return keyManager;
     }
     
     public synchronized void start() {

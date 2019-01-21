@@ -7,25 +7,30 @@ package tileGame.states;
 
 import gfx.Assets;
 import java.awt.Graphics;
+import tileGame.Game;
+import tileGame.entities.creatures.Player;
 
 /**
  *
  * @author Antoine Ho
  */
 public class GameState extends State{
-
-    public GameState() {
-        
+    
+    private Player player;
+    
+    public GameState(Game game) {
+        super(game);
+        player = new Player(game, 100, 100);
     }
     
     @Override
     public void tick() {
-        
+        player.tick();
     }
 
     @Override
     public void render(Graphics g) {
-        
+        player.render(g);
     }
     
 }
