@@ -3,10 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/input/KeyManager.java</file>
             <file>file:/D:/gitRepos/tileGame/src/display/Display.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/gfx/Assets.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/entities/creatures/Player.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/tiles/BushTile.java</file>
             <file>file:/D:/gitRepos/tileGame/src/tileGame/Launcher.java</file>
-            <file>file:/D:/gitRepos/tileGame/src/gfx/ImageLoader.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/entities/creatures/Creature.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/tiles/Tile.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/tiles/GroundTile.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/states/State.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/states/MenuState.java</file>
             <file>file:/D:/gitRepos/tileGame/src/tileGame/Game.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/states/GameState.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/worlds/World.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/gfx/ImageLoader.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/gfx/SpriteSheet.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/tiles/BrickTile.java</file>
+            <file>file:/D:/gitRepos/tileGame/src/tileGame/entities/Entity.java</file>
         </group>
     </open-files>
 </project-private>

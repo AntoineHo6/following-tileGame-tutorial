@@ -15,33 +15,37 @@ import tileGame.Game;
  */
 public class Player extends Creature {
     
-    private Game game;
-    
-    public Player(Game game, float x, float y) {
-        super(x, y);
-        this.game = game;
+    public Player(Game game, float x, float y, int width, int height) {
+        super(game, x, y, width, height);
     }
 
     @Override
     public void tick() {
-        if (game.getKeyManager().up) {
-            y -= 3;
-        }
-        else if (game.getKeyManager().down) {
-            y += 3;
-        }
-        else if (game.getKeyManager().left) {
-            x -= 3;
-        }
-        else if (game.getKeyManager().right){
-            x += 3;
-        }
+        getInput();
+        move();
+    }
+    
+    private void getInput() {
+        xMove = 0;
+        yMove = 0;
         
+        if (game.getKeyManager().up) {
+            yMove = -speed;
+        }
+        if (game.getKeyManager().down) {
+            yMove = speed;
+        }
+        if (game.getKeyManager().left) {
+            xMove = -speed;
+        }
+        if (game.getKeyManager().right) {
+            xMove = speed;
+        }
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) x, (int) y, null);
+        g.drawImage(Assets.player, (int) x, (int) y, width, height, null);
     }
     
 }
