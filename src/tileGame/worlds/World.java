@@ -7,6 +7,7 @@ package tileGame.worlds;
 
 import java.awt.Graphics;
 import tileGame.Game;
+import tileGame.Handler;
 import tileGame.tiles.Tile;
 import tileGame.utils.Utils;
 
@@ -16,13 +17,13 @@ import tileGame.utils.Utils;
  */
 public class World {
     
-    private Game game;
+    private Handler handler;
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
     
-    public World(Game game, String path) {
-        this.game = game;
+    public World(Handler handler, String path) {
+        this.handler = handler;
         loadWorld(path);
     }
     
@@ -31,18 +32,29 @@ public class World {
     }
     
     public void render(Graphics g) {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                getTile(j, i).render(g, j * Tile.DEF_TILE_WIDTH, i * Tile.DEF_TILE_HEIGHT);
+        int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.DEF_TILE_WIDTH);
+        int xEnd = (int) Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.DEF_TILE_WIDTH+1);
+        int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.DEF_TILE_HEIGHT);;
+        int yEnd = (int) Math.min(width, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.DEF_TILE_HEIGHT+1);
+        
+        for (int i = yStart; i < yEnd; i++) {
+            for (int j = xStart; j < xEnd; j++) {
+                getTile(j, i).render(g, (int) (j * Tile.DEF_TILE_WIDTH - handler.getGameCamera().getxOffset()), 
+                        (int) (i * Tile.DEF_TILE_HEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
     }
     
     public Tile getTile(int x, int y) {
-        Tile t = Tile.tiles[tiles[x][y]];
+        Tile t;
+        try{
+            t = Tile.tiles[tiles[x][y]];
+        } catch(ArrayIndexOutOfBoundsException e){
+            t = null;
+        }
         
         if (t == null) {
-            return Tile.brickTile;
+            return Tile.groundTile;
         }
         
         return t;

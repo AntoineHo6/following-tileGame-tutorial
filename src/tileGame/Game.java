@@ -7,6 +7,7 @@ package tileGame;
 
 import display.Display;
 import gfx.Assets;
+import gfx.GameCamera;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import tileGame.input.KeyManager;
@@ -21,7 +22,7 @@ import tileGame.states.State;
 public class Game implements Runnable{
     
     private Display display;
-    public int WIDTH, HEIGHT;
+    private int WIDTH, HEIGHT;
     public String TITLE;
     private Thread thread;
     private boolean running = false;
@@ -36,6 +37,12 @@ public class Game implements Runnable{
     // Inputs
     private KeyManager keyManager;
     
+    // Camera
+    private GameCamera gameCamera;
+    
+    // Handler
+    private Handler handler;
+    
     
     public Game(String title, int width, int height){
         this.WIDTH = width;
@@ -49,8 +56,11 @@ public class Game implements Runnable{
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
         
-        gameState = new GameState(this);
-        menuState = new MenuState(this);
+        gameCamera = new GameCamera(this, 0, 0);
+        handler = new Handler(this);
+        
+        gameState = new GameState(handler);
+        menuState = new MenuState(handler);
         State.setState(gameState);
     }
     
@@ -123,6 +133,18 @@ public class Game implements Runnable{
     
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+    
+    public GameCamera getGameCamera() {
+        return gameCamera;
+    }
+    
+    public int getWidth() {
+        return WIDTH;
+    }
+    
+    public int getHeight() {
+        return HEIGHT;
     }
     
     public synchronized void start() {
